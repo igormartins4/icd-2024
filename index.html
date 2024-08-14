@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabalho Prático - ICD 2024/1</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Geração de Dieta Personalizada Para Diabéticos</h1>
+        <h2>Projeto Final de Introdução à Ciência de Dados</h2>
+        <h3>Trabalho ICD 24/1 - Grupo 19</h3>
+        <h4>Arthur Ramos, Gabriel Coelho, Gabriel Marra, Igor Martins</h4>
+    </header>
+    <main class="container">
+
+        <h2>INTRODUÇÃO</h2>
+        <p>Neste trabalho, iremos analisar como a composição de macronutrientes de um determinado alimento impacta nos
+            seus respectivos índice glicêmico (GI) e carga glicêmica (GL).
+        </p>
+
+        <h2>MOTIVAÇÃO</h2>
+        <p>Explicando brevemente, como consta na fonte de nossa base de dados:
+        </p>
+
+        <blockquote>
+            “O Índice Glicêmico (GI) é uma medida da rapidez com que um determinado alimento pode aumentar os seus
+            níveis de açúcar no sangue. [...] O GI de um alimento é determinado medindo a área incremental sob a curva
+            do nível de açúcar no sangue em duas horas (AUC) após um período de 12 horas de jejum e ingestão do alimento
+            que tem uma certa quantidade de carboidratos disponíveis (geralmente 50 g). A AUC do alimento testado é
+            dividida pela AUC do padrão (glicose ou pão branco, com duas definições distintas) e multiplicada por 100. O
+            valor médio do IG é determinado a partir dos dados obtidos de 10 participantes humanos. [...]
+        </blockquote>
+
+        <blockquote>
+            O Índice Glicêmico é uma medida importante da rapidez com que determinados alimentos podem afetar os níveis
+            de açúcar no sangue. Conhecer e compreender os valores do GI dos diferentes alimentos pode ajudá-lo a fazer
+            escolhas alimentares informadas para ajudar a manter níveis saudáveis de açúcar no sangue.”
+        </blockquote>
+
+        <p>A partir daí, é introduzida a carga glicêmica (GL): </p>
+
+        <blockquote>
+            “O IG é uma medida da rapidez com que um determinado alimento é convertido em glucose, e é expresso numa
+            escala de 1 a 100 (sendo 100 a conversão mais rápida). O GL vai mais longe, tendo em conta não só a
+            velocidade de conversão da glicose, mas também a quantidade de carboidratos contidos num determinado
+            alimento. Para calcular o GL, é utilizada a seguinte fórmula: GL = (GI x quantidade de carboidratos
+            disponíveis por porção) dividido por 100.”
+        </blockquote>
+
+        <p>Portanto, em nosso trabalho, iremos focar em pesquisar se é possível descobrir o GI e, consequentemente, o GL
+            de um alimento apenas pela quantidade de carboidratos, proteínas e gorduras informados em sua tabela
+            nutricional. Caso possível, tal procedimento seria de grande ajuda a pacientes diabéticos, que precisam
+            manter controle assíduo dos seus níveis de glicose no sangue e por conseguinte sua alimentação.
+        </p>
+
+        <h2>DADOS UTILIZADOS
+        </h2>
+
+        <p>
+            Utilizamos os dados presentes no site
+            <a href="https://glycemic-index.net/">Glycemic Index Guide</a>. Estas são as principais features:
+        <ol>
+            <li>nome do alimento</li>
+            <li>categoria</li>
+            <li>calorias</li>
+            <li>carboidratos</li>
+            <li>proteínas</li>
+            <li>gorduras</li>
+            <li>GI</li>
+            <li>GL</li>
+        </ol>
+        </p>
+
+        <h2>PERGUNTAS</h2>
+        <ol>
+            <li>Quais são os alimentos menos recomendáveis para diabéticos? E os mais? O que eles têm em comum? Um
+                modelo preditivo consegue identificá-los de maneira eficaz e evitar uns e priorizar outros?</li>
+            <li>É possível gerar recomendações de dieta para diabéticos por meio de machine learning que sejam
+                personalizadas, se adequando a seus hábitos e preferências?</li>
+            <li>O que faz do nutricionista um profissional não substituível por uma inteligência artificial? Quais são
+                as principais limitações de um modelo preditivo para essa finalidade?</li>
+        </ol>
+
+        <h2>ANÁLISE EXPLORATÓRIA DOS DADOS</h2>
+        <p>
+            De acordo com a própria fonte, <q>Foods with the <a
+                    href="https://glycemic-index.net/glossary/high-gi/">highest GI</a> are generally composed of sugars
+                and simple <a href="https://glycemic-index.net/glossary/carbohydrates/">carbohydrates</a>, which can
+                cause spikes in <a href="https://glycemic-index.net/glossary/blood-sugar-level/">blood sugar
+                    levels</a>.</q>
+        </p>
+
+        <p>
+            Em tese, cada grama de carboidrato corresponde a 4 kcal. Podemos observar que a base de dados não
+            corresponde a essa conta, o que nos leva a desconfiar do número de calorias. Portanto, foi criada uma
+            feature <code>“real_calories”</code> que calcula as calorias do alimento multiplicando:
+        <ul>
+            <li>Gramas de carboidratos e proteínas por 4</li>
+            <li>Gramas de gorduras por 9</li>
+        </ul>
+
+        A partir daí, foi calculada a feature <code>“carbs_kcal_perc”</code>, que pega a porcentagem de calorias do
+        alimento que são provenientes de carboidratos. Depois, foi adicionada a feature <code>“low_gl”</code>, binária
+        que simplesmente calcula se o GL do alimento é menor ou igual a 10 ou não.
+        </p>
+
+        <p>Adicionando um pequeno desvio na última, esta visualização é gerada:</p>
+
+        <img src="./assets/grafico-um.png" alt="Gráfico de kilocalorias versus baixo GL">
+
+        <p>
+            Com isso, é possível perceber que alimentos com alta % de calorias provenientes de carboidratos têm uma
+            tendência maior a serem altos em GL! Esse é um ótimo indício de alimentos a serem evitados por diabéticos.
+        </p>
+
+        <p>
+            Existem vários alimentos com GL = 0. Todos esses alimentos são alimentos com baixíssima quantidade de
+            carboidratos por 100g (o que mais contém, tem 7g). Isso faz muito sentido considerando que o GL é calculado
+            pelo <code>GI * carbs / 100</code>. Entretanto, como nem todos tem o carboidrato zerado, isso também é um
+            ótimo indicativo
+            que uma baixa quantidade de carboidratos significa um baixo GI.
+        </p>
+
+        <p>
+            Ao se gerar o gráfico comparativo, incluindo uma regressão linear, percebe-se que a correlação dos dados é
+            positiva, mas não muito forte.
+        </p>
+
+        <img src="./assets/grafico-dois.png" alt="Gráfico de índice glicêmico versus carboidratos">
+
+        <p>
+            Interessantemente, olhando-se a média do GL por categoria, percebe-se que os maiores GLs são de categorias
+            costumeiramente constituídas principalmente por carboidratos (vermelho) ou gorduras (amarelo):
+        </p>
+
+        <table>
+            <tr>
+                <td>Baked products</td>
+                <td>31.99</td>
+            </tr>
+            <tr>
+                <td>Beverages</td>
+                <td>4.53</td>
+            </tr>
+
+            <tr>
+                <td>Dairy</td>
+                <td>3.7</td>
+            </tr>
+
+            <tr>
+                <td>Fast foods</td>
+                <td>30.56</td>
+            </tr>
+
+            <tr>
+                <td>Fruits</td>
+                <td>10.38</td>
+            </tr>
+
+            <tr>
+                <td>Grains</td>
+                <td>28.61</td>
+            </tr>
+
+            <tr>
+                <td>Greens</td>
+                <td>7.64</td>
+            </tr>
+
+            <tr>
+                <td>Meat</td>
+                <td>0.84</td>
+            </tr>
+
+            <tr>
+                <td>Mushrooms</td>
+                <td>1.35</td>
+            </tr>
+
+            <tr>
+                <td>Nuts</td>
+                <td>7.5</td>
+            </tr>
+
+            <tr>
+                <td>Oils and sauces</td>
+                <td>1.02</td>
+            </tr>
+
+            <tr>
+                <td>Seafood</td>
+                <td>0.7</td>
+            </tr>
+
+            <tr>
+                <td>Soups</td>
+                <td>2.9</td>
+            </tr>
+
+            <tr>
+                <td>Spices</td>
+                <td>5.07</td>
+            </tr>
+
+            <tr>
+                <td>Sweets</td>
+                <td>38.51</td>
+            </tr>
+
+            <tr>
+                <td>Vegetables</td>
+                <td>3.5</td>
+            </tr>
+
+            <tr>
+                <td>Other</td>
+                <td>18.59</td>
+            </tr>
+
+        </table>
+
+
+
+
+
+
+
+
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+
+
+
+<head>
+    <link rel="icon" href="./assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <img src="./assets/logo.svg" alt="Logo Dev Finance">
+
+        <div class="mode-content">
+            <div class="container-mode">
+                <h1>Modo Noturno</h1>
+                <div class="toggle">
+                    <input id="switch" type="checkbox" name="theme">
+                    <label for="switch">Toggle</label>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <main class="container">
+        <section id="balance">
+            <h2 class="sr-only">Balanço</h2>
+
+            <div class="card">
+                <h3>
+                    <span>Entradas</span>
+                    <img src="./assets/income.svg" alt="Imagem de entradas">
+                </h3>
+                <p id="incomeDisplay">R$ 0,00</p>
+            </div>
+
+            <div class="card">
+                <h3>
+                    <span>Saídas</span>
+                    <img src="./assets/expense.svg" alt="Imagem de saídas">
+                </h3>
+                <p id="expenseDisplay">R$ 0,00</p>
+            </div>
+
+            <div class="card total">
+                <h3>
+                    <span>Total</span>
+                    <img src="./assets/total.svg" alt="Imagem de total">
+                </h3>
+                <p id="totalDisplay">R$ 0,00</p>
+            </div>
+
+        </section>
+        <section id="transaction">
+            <h2 class="sr-only">Transações</h2>
+
+            <a href="#" onclick="Modal.alternate()" class="button new">+ Nova Transação</a>
+
+            <table id="data-table">
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                        <th>Data</th>
+                        <th>Categoria</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <div class="modal-overlay">
+        <div class="modal">
+            <div id="form">
+                <h2>Nova Transação</h2>
+                <form action="" onsubmit="Form.submit(event)">
+                    <div class="input-group">
+                        <label class="sr-only" for="description">Descrição
+                        </label>
+                        <input type="text" id="description" name="description" placeholder="Descrição" />
+                    </div>
+
+                    <div class="input-group">
+                        <label class="sr-only" for="amount">Valor
+                        </label>
+                        <input type="number" step="0.01" id="amount" name="amount" placeholder="0,00" />
+                        <small class="help">
+                            Use o sinal - (negativo) para despesas
+                            e , (vírgula) para casas decimais.
+                        </small>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="sr-only" for="date">Data
+                        </label>
+                        <input type="date" id="date" name="date" />
+                    </div>
+
+                    <div class="input-group">
+                        <label class="sr-only" for="category">Categoria
+                        </label>
+                        <input type="text" id="category" name="category" placeholder="Categoria" />
+                    </div>
+
+                    <div class="input-group actions">
+                        <a onclick="Modal.alternate()" href="#" class="button cancel">Cancelar</a>
+                        <button>Salvar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>dev.finance$</p>
+    </footer>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
