@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trabalho Prático - ICD 2024/1</title>
     <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Slab:wght@100..900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -15,14 +21,24 @@
         <h3>Trabalho ICD 24/1 - Grupo 19</h3>
         <h4>Arthur Ramos, Gabriel Coelho, Gabriel Marra, Igor Martins</h4>
     </header>
-    <main class="container">
 
-        <h2>INTRODUÇÃO</h2>
+
+    <main class="container">
+        <h2>Sumário</h2>
+        <ol>
+            <li><a href="#introducao">Introdução</a></li>
+            <li><a href="#motivacao">Motivação</a></li>
+            <li><a href="#dados">Dados Utilizados</a></li>
+            <li><a href="#perguntas">Perguntas</a></li>
+            <li><a href="#analise">Análise Exploratória dos Dados</a></li>
+        </ol>
+
+        <h2 id="introducao">INTRODUÇÃO</h2>
         <p>Neste trabalho, iremos analisar como a composição de macronutrientes de um determinado alimento impacta nos
             seus respectivos índice glicêmico (GI) e carga glicêmica (GL).
         </p>
 
-        <h2>MOTIVAÇÃO</h2>
+        <h2 id="motivacao">MOTIVAÇÃO</h2>
         <p>Explicando brevemente, como consta na fonte de nossa base de dados:
         </p>
 
@@ -57,7 +73,7 @@
             manter controle assíduo dos seus níveis de glicose no sangue e por conseguinte sua alimentação.
         </p>
 
-        <h2>DADOS UTILIZADOS
+        <h2 id="dados">DADOS UTILIZADOS
         </h2>
 
         <p>
@@ -75,7 +91,7 @@
         </ol>
         </p>
 
-        <h2>PERGUNTAS</h2>
+        <h2 id="perguntas">PERGUNTAS</h2>
         <ol>
             <li>Quais são os alimentos menos recomendáveis para diabéticos? E os mais? O que eles têm em comum? Um
                 modelo preditivo consegue identificá-los de maneira eficaz e evitar uns e priorizar outros?</li>
@@ -85,7 +101,7 @@
                 as principais limitações de um modelo preditivo para essa finalidade?</li>
         </ol>
 
-        <h2>ANÁLISE EXPLORATÓRIA DOS DADOS</h2>
+        <h2 id="analise">ANÁLISE EXPLORATÓRIA DOS DADOS</h2>
         <p>
             De acordo com a própria fonte, <q>Foods with the <a
                     href="https://glycemic-index.net/glossary/high-gi/">highest GI</a> are generally composed of sugars
@@ -223,144 +239,8 @@
             </tr>
 
         </table>
-
-
-
-
-
-
-
-
     </main>
-    <script src="script.js"></script>
-</body>
-
-</html>
-
-
-
-
-<head>
-    <link rel="icon" href="./assets/favicon.svg">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&display=swap"
-        rel="stylesheet">
-</head>
-
-<body>
-    <header>
-        <img src="./assets/logo.svg" alt="Logo Dev Finance">
-
-        <div class="mode-content">
-            <div class="container-mode">
-                <h1>Modo Noturno</h1>
-                <div class="toggle">
-                    <input id="switch" type="checkbox" name="theme">
-                    <label for="switch">Toggle</label>
-                </div>
-            </div>
-        </div>
-
-    </header>
-    <main class="container">
-        <section id="balance">
-            <h2 class="sr-only">Balanço</h2>
-
-            <div class="card">
-                <h3>
-                    <span>Entradas</span>
-                    <img src="./assets/income.svg" alt="Imagem de entradas">
-                </h3>
-                <p id="incomeDisplay">R$ 0,00</p>
-            </div>
-
-            <div class="card">
-                <h3>
-                    <span>Saídas</span>
-                    <img src="./assets/expense.svg" alt="Imagem de saídas">
-                </h3>
-                <p id="expenseDisplay">R$ 0,00</p>
-            </div>
-
-            <div class="card total">
-                <h3>
-                    <span>Total</span>
-                    <img src="./assets/total.svg" alt="Imagem de total">
-                </h3>
-                <p id="totalDisplay">R$ 0,00</p>
-            </div>
-
-        </section>
-        <section id="transaction">
-            <h2 class="sr-only">Transações</h2>
-
-            <a href="#" onclick="Modal.alternate()" class="button new">+ Nova Transação</a>
-
-            <table id="data-table">
-                <thead>
-                    <tr>
-                        <th>Descrição</th>
-                        <th>Valor</th>
-                        <th>Data</th>
-                        <th>Categoria</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </section>
-    </main>
-
-    <div class="modal-overlay">
-        <div class="modal">
-            <div id="form">
-                <h2>Nova Transação</h2>
-                <form action="" onsubmit="Form.submit(event)">
-                    <div class="input-group">
-                        <label class="sr-only" for="description">Descrição
-                        </label>
-                        <input type="text" id="description" name="description" placeholder="Descrição" />
-                    </div>
-
-                    <div class="input-group">
-                        <label class="sr-only" for="amount">Valor
-                        </label>
-                        <input type="number" step="0.01" id="amount" name="amount" placeholder="0,00" />
-                        <small class="help">
-                            Use o sinal - (negativo) para despesas
-                            e , (vírgula) para casas decimais.
-                        </small>
-                    </div>
-
-                    <div class="input-group">
-                        <label class="sr-only" for="date">Data
-                        </label>
-                        <input type="date" id="date" name="date" />
-                    </div>
-
-                    <div class="input-group">
-                        <label class="sr-only" for="category">Categoria
-                        </label>
-                        <input type="text" id="category" name="category" placeholder="Categoria" />
-                    </div>
-
-                    <div class="input-group actions">
-                        <a onclick="Modal.alternate()" href="#" class="button cancel">Cancelar</a>
-                        <button>Salvar</button>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        <p>dev.finance$</p>
-    </footer>
-
-    <script src="./script.js"></script>
+    <!-- <script src="script.js"></script> -->
 </body>
 
 </html>
