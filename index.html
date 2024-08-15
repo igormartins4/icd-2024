@@ -9,8 +9,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Slab:wght@100..900&display=swap"
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;1,400;1,500&display=swap"
         rel="stylesheet">
 </head>
 
@@ -33,12 +34,12 @@
             <li><a href="#analise">Análise Exploratória dos Dados</a></li>
         </ol>
 
-        <h2 id="introducao">INTRODUÇÃO</h2>
+        <h2 id="introducao">Introdução</h2>
         <p>Neste trabalho, iremos analisar como a composição de macronutrientes de um determinado alimento impacta nos
             seus respectivos índice glicêmico (GI) e carga glicêmica (GL).
         </p>
 
-        <h2 id="motivacao">MOTIVAÇÃO</h2>
+        <h2 id="motivacao">Motivação</h2>
         <p>Explicando brevemente, como consta na fonte de nossa base de dados:
         </p>
 
@@ -73,8 +74,7 @@
             manter controle assíduo dos seus níveis de glicose no sangue e por conseguinte sua alimentação.
         </p>
 
-        <h2 id="dados">DADOS UTILIZADOS
-        </h2>
+        <h2 id="dados">Dados Utilizados</h2>
 
         <p>
             Utilizamos os dados presentes no site
@@ -91,7 +91,7 @@
         </ol>
         </p>
 
-        <h2 id="perguntas">PERGUNTAS</h2>
+        <h2 id="perguntas">Perguntas</h2>
         <ol>
             <li>Quais são os alimentos menos recomendáveis para diabéticos? E os mais? O que eles têm em comum? Um
                 modelo preditivo consegue identificá-los de maneira eficaz e evitar uns e priorizar outros?</li>
@@ -101,7 +101,7 @@
                 as principais limitações de um modelo preditivo para essa finalidade?</li>
         </ol>
 
-        <h2 id="analise">ANÁLISE EXPLORATÓRIA DOS DADOS</h2>
+        <h2 id="analise">Análise Exploratória dos Dados</h2>
         <p>
             De acordo com a própria fonte, <q>Foods with the <a
                     href="https://glycemic-index.net/glossary/high-gi/">highest GI</a> are generally composed of sugars
@@ -155,6 +155,10 @@
 
         <table>
             <tr>
+                <th>Categoria</th>
+                <th>GL Médio</th>
+            </tr>
+            <tr id="table-carbohydrate">
                 <td>Baked products</td>
                 <td>31.99</td>
             </tr>
@@ -162,85 +166,75 @@
                 <td>Beverages</td>
                 <td>4.53</td>
             </tr>
-
             <tr>
                 <td>Dairy</td>
                 <td>3.7</td>
             </tr>
-
-            <tr>
+            <tr id="table-carbohydrate">
                 <td>Fast foods</td>
                 <td>30.56</td>
             </tr>
-
             <tr>
                 <td>Fruits</td>
                 <td>10.38</td>
             </tr>
-
-            <tr>
+            <tr id="table-fat">
                 <td>Grains</td>
                 <td>28.61</td>
             </tr>
-
             <tr>
                 <td>Greens</td>
                 <td>7.64</td>
             </tr>
-
             <tr>
                 <td>Meat</td>
                 <td>0.84</td>
             </tr>
-
             <tr>
                 <td>Mushrooms</td>
                 <td>1.35</td>
             </tr>
-
             <tr>
                 <td>Nuts</td>
                 <td>7.5</td>
             </tr>
-
             <tr>
                 <td>Oils and sauces</td>
                 <td>1.02</td>
             </tr>
-
             <tr>
                 <td>Seafood</td>
                 <td>0.7</td>
             </tr>
-
             <tr>
                 <td>Soups</td>
                 <td>2.9</td>
             </tr>
-
             <tr>
                 <td>Spices</td>
                 <td>5.07</td>
             </tr>
-
-            <tr>
+            <tr id="table-carbohydrate">
                 <td>Sweets</td>
                 <td>38.51</td>
             </tr>
-
             <tr>
                 <td>Vegetables</td>
                 <td>3.5</td>
             </tr>
-
             <tr>
                 <td>Other</td>
                 <td>18.59</td>
             </tr>
-
         </table>
+
     </main>
-    <!-- <script src="script.js"></script> -->
+
+    <footer>
+        <p>Arthur Ramos, Gabriel Coelho, Gabriel Marra, Igor Martins © 2024 MIT License</p>
+    </footer>
+
+
 </body>
 
 </html>
