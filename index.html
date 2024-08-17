@@ -34,6 +34,8 @@
             <li><a href="#dados">Dados Utilizados</a></li>
             <li><a href="#perguntas">Perguntas</a></li>
             <li><a href="#analise">Análise Exploratória dos Dados</a></li>
+            <li><a href="#hipotese">Teste de Hipótese</a></li>
+            <li><a href="#regressao">Modelos de Regressão</a></li>
         </ol>
 
         <h2 id="introducao">Introdução</h2>
@@ -42,8 +44,7 @@
         </p>
 
         <h2 id="motivacao">Motivação</h2>
-        <p>Explicando brevemente, como consta na fonte de nossa base de dados:
-        </p>
+        <p>Explicando brevemente, como consta na fonte de nossa base de dados:</p>
 
         <blockquote>
             “O Índice Glicêmico (GI) é uma medida da rapidez com que um determinado alimento pode aumentar os seus
@@ -229,6 +230,129 @@
                 <td>18.59</td>
             </tr>
         </table>
+
+        <h2 id="hipotese">Teste de Hipótese</h2>
+        <p>Categorias onde os alimentos são majoritariamente compostos de carboidratos e gorduras tendem a ter GL mais
+            alto. Para testar a hipótese, podemos fazer um teste de permutação: embaralhamos as categorias dos
+            alimentos, calculamos as médias e vemos se os valores que encontramos originalmente podem ser explicados
+            pelo acaso ou se são de fato raros de se acontecer, implicando que nossa tese tem validade.</p>
+
+        <ol>
+            <li>Hipótese nula: (H0): As GLs médias das categorias que observamos pode ocorrer ao acaso</li>
+            <li>Hipótese alternativa (HA): Alimentos com maior fração de carboidratos em sua composição têm maior GL, na
+                média.</li>
+        </ol>
+
+        <img src="./assets/grafico-tres.png" alt="Gráfico de ocorrências e médias de Baked products">
+        <img src="./assets/grafico-quatro.png" alt="Gráfico de ocorrências e médias de Beverages">
+        <img src="./assets/grafico-cinco.png" alt="Gráfico de ocorrências e médias de Dairy">
+        <img src="./assets/grafico-seis.png" alt="Gráfico de ocorrências e médias de Fast foods">
+        <img src="./assets/grafico-sete.png" alt="Gráfico de ocorrências e médias de Fruits">
+        <img src="./assets/grafico-oito.png" alt="Gráfico de ocorrências e médias de Grains">
+        <img src="./assets/grafico-nove.png" alt="Gráfico de ocorrências e médias de Greens">
+        <img src="./assets/grafico-dez.png" alt="Gráfico de ocorrências e médias de Meat">
+        <img src="./assets/grafico-onze.png" alt="Gráfico de ocorrências e médias de Mushrooms">
+        <img src="./assets/grafico-doze.png" alt="Gráfico de ocorrências e médias de Nuts">
+        <img src="./assets/grafico-treze.png" alt="Gráfico de ocorrências e médias de Oils and sauces">
+        <img src="./assets/grafico-catorze.png" alt="Gráfico de ocorrências e médias de Other">
+        <img src="./assets/grafico-quinze.png" alt="Gráfico de ocorrências e médias de Seafood">
+        <img src="./assets/grafico-dezesseis.png" alt="Gráfico de ocorrências e médias de Soups">
+        <img src="./assets/grafico-dezessete.png" alt="Gráfico de ocorrências e médias de Spices">
+        <img src="./assets/grafico-dezoito.png" alt="Gráfico de ocorrências e médias de Sweets">
+        <img src="./assets/grafico-dezenove.png" alt="Gráfico de ocorrências e médias de Vegetables">
+
+        <p>Executamos diversos intervalos de confiança, e podemos notar que, na maioria deles, os valores observados
+            estão fora do intervalo de confiança, o que nos permite rejeitar a hipótese nula de que os valores que
+            observamos são explicados pelo acaso. Isso nos dá mais confiança de que nossa hipótese alternativa está
+            correta, e que alimentos onde a maior parte das calorias vem de carboidratos e gorduras têm GL maior, sendo
+            assim alimentos que devem ser evitados por pessoas com diabetes.
+
+        </p>
+
+        <ol>
+            <li>Os casos em que os valores estão dentro do IC podem ser facilmente explicados pelo número de elementos:
+                categorias como Sopas, Frutos do mar e Cogumelos são muito pequenas (5, 5 e 2 alimentos,
+                respectivamente). Isso aumenta a variabilidade das médias, alargando os Intervalos de Confiança para
+                cobrir uma faixa de valores maior.</li>
+        </ol>
+
+        <h2 id="regressao">Modelos de Regressão</h2>
+        <p>Além das análises exploratórias que fizemos dos dados, o nosso teste de hipótese nos confirmou que de fato há
+            uma correlação entre a composição em macronutrientes do alimento (em especial carboidratos e gorduras) e o
+            GL dele. Com base nesses indícios, podemos treinar um modelo de regressão para prever o valor do GL de um
+            alimento a partir de suas informações nutricionais.</p>
+        <p>Inicialmente, tentamos duas abordagens: uma regressão múltipla com regularização L2 e uma regressão baseada
+            em vizinhos mais próximos. Utilizamos também a validação cruzada para evitar um overfitting dos nossos
+            dados, na busca de encontrar um modelo que generalize melhor. Abaixo estão os resultados que encontramos,
+            utilizando a biblioteca SciKit Learn.</p>
+
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <h1>COLOCAR UM GRÁFICO AQUI</h1>
+
+        <br>
+        <br>
+
+        <H1>COLOCAR OUTRO GRÁFICO AQUI</H1>
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+        <p>Olhando para o valor do R2 de cada um dos modelos, avaliado nos dados de teste, vemos que a regressão
+            múltipla se saiu melhor que o KNN, e por isso escolhemos esse modelo para prosseguir.</p>
+
+        <p>Para desenvolvermos nosso modelo final, utilizamos a biblioteca statsmodels, pois ela nos apresenta
+            resultados mais detalhados, que facilitam a criação de um modelo mais polido.</p>
+
+
+
+        <p>O relatório de regressão acima, gerado com a biblioteca statsmodels, mostra os intervalos de confiança para
+            os coeficientes da nossa regressão. Os intervalos que contém o valor 0 correspondem a variáveis que podem
+            possivelmente ser eliminadas do nosso modelo, para reduzir a variância e encontrar um modelo que generalize
+            melhor.</p>
+
+
+        <!-- 
+            <table>
+                <tr>
+                    <th>Dep. Variable</th>
+                    <th>Model</th>
+                    <th>Method</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>No. Observations</th>
+                    <th>Df Residuals</th>
+                    <th>Df Model</th>
+                    <th>Covariance Type</th>
+                    <th>R-squared</th>
+                    <th>Adj. R-squared</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                   <td></td>
+                </tr>
+               
+
+            </table> -->
+
+
+
+
+
+
+
+
 
     </main>
 

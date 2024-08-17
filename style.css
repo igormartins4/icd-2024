@@ -29,7 +29,7 @@ body {
   font-style: normal;
   line-height: 2rem;
 
-  margin: 2rem;
+  margin-bottom: 2rem;
 }
 
 header {
@@ -67,7 +67,7 @@ h2 {
 blockquote {
   margin: 1rem auto;
   padding: 1rem;
-  background-color: var(--bg); /* Cor de fundo suave */
+  background-color: var(--bg);
   width: 80%;
 
   border-radius: 0.8rem;
@@ -78,6 +78,10 @@ blockquote {
 q {
   font-style: italic;
   background-color: var(--bg);
+}
+
+p {
+  margin: 1rem 0;
 }
 
 ul,
@@ -130,4 +134,20 @@ footer {
   margin-top: 2rem;
 
   font-size: 0.8rem;
+}
+
+/* Responsive =====================================*/
+@media (max-width: 800px) {
+  html {
+    font-size: 87.5%;
+  }
+
+  ul,
+  ol {
+    padding: 0 3rem;
+  }
+
+  table {
+    width: 100%;
+  }
 }
