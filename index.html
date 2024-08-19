@@ -350,56 +350,173 @@
         <p>Para melhorar o nosso modelo, utilizamos a biblioteca statsmodels, pois ela nos apresenta resultados mais
             detalhados, que facilitam a criação de um modelo mais polido.</p>
 
+        <table>
+            <tr>
+                <td>Dep. Variable</td>
+                <td>glycemic_load</td>
+            </tr>
+            <tr>
+                <td>Model</td>
+                <td>OLS</td>
+            </tr>
+            <tr>
+                <td>Method</td>
+                <td>Least Squares</td>
+            </tr>
+            <tr>
+                <td>Date</td>
+                <td>dom, 18 ago 2024</td>
+            </tr>
+            <tr>
+                <td>Time</td>
+                <td>00:58:58</td>
+            </tr>
+            <tr>
+                <td>No. Observations</td>
+                <td>462</td>
+            </tr>
+            <tr>
+                <td>Df Residuals</td>
+                <td>457</td>
+            </tr>
+            <tr>
+                <td>Df Model</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>Covariance Type</td>
+                <td>nonrobust</td>
+            </tr>
+            <tr>
+                <td>R-squared: </td>
+                <td>0.772</td>
+            </tr>
+            <tr>
+                <td>Adj. R-squared: </td>
+                <td>0.770</td>
+            </tr>
+            <tr>
+                <td>F-statistic: </td>
+                <td>386.7</td>
+            </tr>
+            <tr>
+                <td>Prob (F-statistic): </td>
+                <td>3.70e-145</td>
+            </tr>
+            <tr>
+                <td>Log-Likelihood: </td>
+                <td>-1684.0</td>
+            </tr>
+            <tr>
+                <td>AIC: </td>
+                <td>3378.</td>
+            </tr>
+            <tr>
+                <td>BIC: </td>
+                <td>3399.</td>
+            </tr>
+        </table>
 
-        <!-- 
-            <table>
-                <tr>
-                    <th>Dep. Variable</th>
-                    <th>Model</th>
-                    <th>Method</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>No. Observations</th>
-                    <th>Df Residuals</th>
-                    <th>Df Model</th>
-                    <th>Covariance Type</th>
-                    <th>R-squared</th>
-                    <th>Adj. R-squared</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                <tr>
-                   <td></td>
-                </tr>
-               
+        <table>
+            <tr>
+                <th></th>
+                <th>coef</th>
+                <th>std err</th>
+                <th>t</th>
+                <th>P>|t| </th>
+                <th>[0.025</th>
+                <th>0.975]</th>
+            </tr>
+            <tr>
+                <th>const</th>
+                <td>3.3097</td>
+                <td>1.699</td>
+                <td>1.948</td>
+                <td>0.052</td>
+                <td>-0.029</td>
+                <td>6.648</td>
+            </tr>
+            <tr>
+                <th>real_calories</th>
+                <td>0.0055</td>
+                <td>0.004</td>
+                <td>1.464</td>
+                <td>0.144</td>
+                <td>-0.002</td>
+                <td>0.013</td>
+            </tr>
+            <tr>
+                <th>carbs_kcal_perc</th>
+                <td>-6.1753</td>
+                <td>2.370</td>
+                <td>-2.606</td>
+                <td>0.009</td>
+                <td>-10.832</td>
+                <td>-1.519</td>
+            </tr>
+            <tr>
+                <th>carbohydrates</th>
+                <td>0.6306</td>
+                <td>0.029</td>
+                <td>21.988</td>
+                <td>0.000</td>
+                <td>0.574</td>
+                <td>0.687</td>
+            </tr>
+            <tr>
+                <th>protein</th>
+                <td>-0.3877</td>
+                <td>0.062</td>
+                <td>-6.269</td>
+                <td>0.000</td>
+                <td>-0.509</td>
+                <td>-0.266</td>
+            </tr>
+            <tr>
+                <th>fats</th>
+                <td>-0.1074</td>
+                <td>0.022</td>
+                <td>-4.906</td>
+                <td>0.000</td>
+                <td>-0.150</td>
+                <td>-0.064</td>
+            </tr>
+        </table>
 
-            </table> -->
-
-
-
-
-
-
-
-        <br>
-        <br>
-        <br>
-        <br>
-
-        <h1>COLOCAR UM GRÁFICO AQUI</h1>
-
-        <br>
-        <br>
-
-        <H1>COLOCAR OUTRO GRÁFICO AQUI</H1>
-
-        <br>
-        <br>
-        <br>
-        <br>
+        <table>
+            <tr>
+                <td>Omnibus: </td>
+                <td>70.545 </td>
+            </tr>
+            <tr>
+                <td>Prob(Omnibus): </td>
+                <td>0.000 </td>
+            </tr>
+            <tr>
+                <td>Skew: </td>
+                <td>0.047 </td>
+            </tr>
+            <tr>
+                <td>Kurtosis: </td>
+                <td>9.427 </td>
+            </tr>
+            <tr>
+                <td>Durbin-Watson: </td>
+                <td>2.086</td>
+            </tr>
+            <tr>
+                <td>Jarque-Bera (JB): </td>
+                <td>795.365</td>
+            </tr>
+            <tr>
+                <td>Prob(JB): </td>
+                <td>1.94e-173</td>
+            </tr>
+            <tr>
+                <td>Cond. No. </td>
+                <td>2.18e+16</td>
+            </tr>
+        </table>
 
         <p>O relatório de regressão acima, gerado com a biblioteca statsmodels, mostra os intervalos de confiança para
             os coeficientes da nossa regressão. Os intervalos que contém o valor 0 correspondem a features que podem
